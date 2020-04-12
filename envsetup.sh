@@ -33,7 +33,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 
 EOF
 
-    __print_lineage_functions_help
+    __print_altair_functions_help
 
 cat <<EOF
 
@@ -142,12 +142,12 @@ function check_product()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
-    if (echo -n $1 | grep -q -e "^lineage_") ; then
-        LINEAGE_BUILD=$(echo -n $1 | sed -e 's/^lineage_//g')
+    if (echo -n $1 | grep -q -e "^altair_") ; then
+        ALTAIR_BUILD=$(echo -n $1 | sed -e 's/^altair_//g')
     else
-        LINEAGE_BUILD=
+        ALTAIR_BUILD=
     fi
-    export LINEAGE_BUILD
+    export ALTAIR_BUILD
 
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
@@ -654,16 +654,16 @@ function lunch()
     check_product $product
     if [ $? -ne 0 ]
     then
-        # if we can't find a product, try to grab it off the LineageOS GitHub
+        # if we can't find a product, try to grab it off the AltairROM GitHub
         T=$(gettop)
         cd $T > /dev/null
-        vendor/altair/build/tools/roomservice.py $product
+        vendor/altair/build/tools/altair-roomservice.py $product
         cd - > /dev/null
         check_product $product
     else
         T=$(gettop)
         cd $T > /dev/null
-        vendor/altair/build/tools/roomservice.py $product true
+        vendor/altair/build/tools/altair-roomservice.py $product true
         cd - > /dev/null
     fi
 
