@@ -982,6 +982,11 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   system_progress = 0.75
 
+  s_rom_version = target_info.GetBuildProp("ro.altair.display.version")
+  s_android_version = target_info.GetBuildProp("ro.build.version.release")
+  s_manufacturer = target_info.GetBuildProp("ro.product.manufacturer")
+  s_device = target_info.GetBuildProp("ro.product.device")
+
   script.Print(" ");
   script.Print(" ");
   script.Print("===========================================");
@@ -992,16 +997,14 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("  / ____ \| |____| |/ ____ \ _| |_| | \ \  ");
   script.Print(" /_/    \_\______|_/_/    \_\_____|_|  \_\ ");
   script.Print(" ");
-  script.Print("          Based on LineageOS 17.1");
-  script.Print("         Created by Martin Pollard");
+  script.Print("                         By Martin Pollard");
+  script.Print("                   Based on LineageOS 17.1");
   script.Print("===========================================");
-  script.Print(" ");
-  builddate = target_info.GetBuildProp("ro.build.date")
-  script.Print(" Build date: %s"%(builddate));
-  build = target_info.GetBuildProp("ro.altair.display.version")
-  script.Print("    Version: %s"%(build));
-  device = target_info.GetBuildProp("ro.product.device")
-  script.Print("     Device: %s"%(device));
+  script.Print("ROM version    : %s"%(s_rom_version));
+  script.Print("Android version: %s"%(s_android_version));
+  script.Print("Manufacturer   : %s"%(s_manufacturer));
+  script.Print("Device         : %s"%(s_device));
+  script.Print("===========================================");
   script.Print(" ");
 
   if OPTIONS.wipe_user_data:
